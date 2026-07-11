@@ -1,7 +1,6 @@
 # 📱 Aplikasi Prediksi Retensi Pelanggan (Telco Customer Churn)
 
-Proyek ini merupakan implementasi Machine Learning untuk memprediksi probabilitas pelanggan perusahaan telekomunikasi yang berpotensi berhenti berlangganan (*churn*) secara *real-time*. Proyek ini disusun untuk memenuhi tugas **SOAL 5: DOCUMENTATION & PRESENTATION** pada UAS.
-
+Proyek ini merupakan implementasi Machine Learning untuk memprediksi probabilitas pelanggan perusahaan telekomunikasi yang berpotensi berhenti berlangganan (*churn*) secara *real-time*.
 ---
 
 ## 🚀 Tautan Projek
