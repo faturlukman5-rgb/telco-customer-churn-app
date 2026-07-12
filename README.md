@@ -4,7 +4,7 @@ Proyek ini merupakan implementasi Machine Learning untuk memprediksi probabilita
 ---
 
 ## 🚀 Tautan Projek
-* **Link Deployment Streamlit:** [Buka Aplikasi Web](https://telco-customer-churn-app-c9nzu2qpme4axzih9esytb.streamlit.app/)
+* **Link Deployment Streamlit:** [Buka Aplikasi Web]( https://telco-customer-churn-app-gjxvas4se6krfxotvodjbz.streamlit.app/)
 * **Repository GitHub:** [Kunjungi Repository](https://github.com/faturlukman5-rgb/telco-customer-churn-app)
 
 ---
