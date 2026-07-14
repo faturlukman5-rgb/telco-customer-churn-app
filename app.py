@@ -84,16 +84,46 @@ if st.button("🚀 Jalankan Analisis Retensi Pelanggan", type="primary"):
     
     # Prediksi menggunakan model Logistic Regression
     prediksi = model.predict(df_input_scaled)[0]
-    probabilitas = model.predict_proba(df_input_scaled)[0][1]
     
-    # Menampilkan Hasil kepada User
-    st.subheader("📢 Hasil Analisis Keputusan:")
-    if prediksi == 1:
-        st.error(f"🚨 **RISIKO TINGGI (CHURN):** Pelanggan diprediksi akan BERHENTI berlangganan dengan tingkat probabilitas sebesar **{probabilitas*100:.2f}%**.")
-        st.markdown("""
-        **Rekomendasi Tindakan Segera (Tim Retensi):**
-        * Tawarkan program migrasi ke kontrak 1 atau 2 tahun dengan diskon khusus.
-        * Berikan bonus kuota gratis atau gratis layanan *Online Security/Tech Support* untuk meningkatkan *value*.
-        """)
-    else:
-        st.success(f"✅ **AMAN (RETAIN):** Pelanggan diprediksi akan TETAP BERLANGGANAN dengan tingkat probabilitas loyalitas sebesar **{(1-probabilitas)*100:.2f}%**.")
+    # Mengambil probabilitas penuh untuk kedua kelas [Tetap Bertahan, Akan Churn]
+    probabilitas_all = model.predict_proba(df_input_scaled)[0]
+    probabilitas_churn = probabilitas_all[1]
+    probabilitas_retain = probabilitas_all[0]
+    
+    # Pembagian layout output hasil (Kiri untuk teks, Kanan untuk Grafik Dosen)
+    res_col1, res_col2 = st.columns([1.2, 1.0])
+    
+    with res_col1:
+        st.subheader("📢 Hasil Analisis Keputusan:")
+        if prediksi == 1:
+            st.error(f"🚨 **RISIKO TINGGI (CHURN):** Pelanggan diprediksi akan BERHENTI berlangganan dengan tingkat probabilitas sebesar **{probabilitas_churn*100:.2f}%**.")
+            st.markdown("""
+            **Rekomendasi Tindakan Segera (Tim Retensi):**
+            * Tawarkan program migrasi ke kontrak 1 atau 2 tahun dengan diskon khusus.
+            * Berikan bonus kuota gratis atau gratis layanan *Online Security/Tech Support* untuk meningkatkan *value*.
+            """)
+        else:
+            st.success(f"✅ **AMAN (RETAIN):** Pelanggan diprediksi akan TETAP BERLANGGANAN dengan tingkat probabilitas loyalitas sebesar **{probabilitas_retain*100:.2f}%**.")
+            st.markdown("""
+            **Rekomendasi Tindakan (Tim Retensi):**
+            * Jaga kepuasan pelanggan dengan program *loyalty reward* berkala.
+            * Tawarkan layanan pelengkap (*upselling*) secara soft-marketing saat masa kontrak mendekati akhir.
+            """)
+            
+    with res_col2:
+        st.subheader("📈 Visualisasi Probabilitas")
+        
+        # Membuat DataFrame untuk memasok data ke komponen grafik
+        chart_data = pd.DataFrame({
+            'Status Keputusan': ['Tetap Bertahan (Retain)', 'Akan Pergi (Churn)'],
+            'Tingkat Keyakinan (%)': [probabilitas_retain * 100, probabilitas_churn * 100]
+        })
+        
+        # Menampilkan grafik batang interaktif (Warna merah jika terdeteksi churn, biru jika aman)
+        st.bar_chart(
+            data=chart_data,
+            x='Status Keputusan',
+            y='Tingkat Keyakinan (%)',
+            color='#ff4b4b' if prediksi == 1 else '#29b5e8'
+        )
+        st.caption("Grafik interaktif di atas merepresentasikan tingkat keyakinan matematis model terhadap keputusan pelanggan.")
