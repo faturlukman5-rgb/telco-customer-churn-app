@@ -20,34 +20,34 @@ def load_assets():
 model, scaler = load_assets()
 
 
-st.sidebar.title("🧭 Navigasi Sistem")
+st.sidebar.title(" Navigasi Sistem")
 st.sidebar.markdown("Silakan pilih menu untuk meninjau kelengkapan proyek UAS:")
 menu = st.sidebar.selectbox(
     "Pilih Halaman:",
     [
-        "1. 📊 Dashboard EDA",
-        "2. 🔮 Model Demo (Prediksi)",
-        "3. 🧪 Evaluasi Model",
-        "4. 💡 Interpretasi Hasil",
-        "5. 📄 Dokumentasi Proyek"
+        "1.  Dashboard EDA",
+        "2.  Model Demo (Prediksi)",
+        "3.  Evaluasi Model",
+        "4.  Interpretasi Hasil",
+        "5.  Dokumentasi Proyek"
     ]
 )
 
 st.sidebar.divider()
 st.sidebar.markdown("**Oleh Kelompok UAS:**")
-st.sidebar.caption("• Mahasiswa 1 & NIM")
-st.sidebar.caption("• Mahasiswa 2 & NIM")
+st.sidebar.caption("• FATUR LUKMAN DINATA   A11.2024.16076")
+st.sidebar.caption("• ATHAYA HELGA RAMADHANU  A11.2024.15832")
 
 
-if menu == "1. 📊 Dashboard EDA":
-    st.title("📊 Halaman 1: Dashboard Exploratory Data Analysis (EDA)")
+if menu == "1.  Dashboard EDA":
+    st.title(" Halaman 1: Dashboard Exploratory Data Analysis (EDA)")
     st.markdown("Menampilkan *insight* visual penting dari dataset historis *Telco Customer Churn*.")
     st.divider()
     
     col_eda1, col_eda2 = st.columns(2)
     
     with col_eda1:
-        st.subheader("📌 Distribusi Target Variable (Churn vs Retain)")
+        st.subheader(" Distribusi Target Variable (Churn vs Retain)")
        
         eda_target = pd.DataFrame({
             'Status': ['Retain (Tetap)', 'Churn (Keluar)'],
@@ -57,7 +57,7 @@ if menu == "1. 📊 Dashboard EDA":
         st.caption("Insight: Terjadi ketidakseimbangan kelas (imbalance data) di mana mayoritas pelanggan berstatus Retain.")
 
     with col_eda2:
-        st.subheader("📌 Hubungan Jenis Kontrak terhadap Rasio Churn")
+        st.subheader(" Hubungan Jenis Kontrak terhadap Rasio Churn")
 
         eda_contract = pd.DataFrame({
             'Jenis Kontrak': ['Month-to-month', 'One year', 'Two year'],
@@ -68,8 +68,8 @@ if menu == "1. 📊 Dashboard EDA":
 
 
 # =========================================================================
-elif menu == "2. 🔮 Model Demo (Prediksi)":
-    st.title("🔮 Halaman 2: Model Demo & Prediksi Real-Time")
+elif menu == "2.  Model Demo (Prediksi)":
+    st.title(" Halaman 2: Model Demo & Prediksi Real-Time")
     st.markdown("Gunakan form di bawah ini untuk mensimulasikan karakteristik pelanggan dan menghitung risiko *churn*.")
     st.divider()
 
@@ -77,14 +77,14 @@ elif menu == "2. 🔮 Model Demo (Prediksi)":
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.subheader("👤 Profil Demografis")
+        st.subheader(" Profil Demografis")
         gender = st.selectbox("Jenis Kelamin", ["Male", "Female"])
         senior_citizen = st.selectbox("Lansia (Senior Citizen)?", ["No", "Yes"])
         partner = st.selectbox("Memiliki Pasangan?", ["No", "Yes"])
         dependents = st.selectbox("Memiliki Tanggungan?", ["No", "Yes"])
 
     with col2:
-        st.subheader("💳 Informasi Akun & Layanan")
+        st.subheader(" Informasi Akun & Layanan")
         tenure = st.slider("Masa Berlangganan (Bulan)", min_value=0, max_value=72, value=12)
         phone_service = st.selectbox("Layanan Telepon", ["No", "Yes"])
         multiple_lines = st.selectbox("Multi-Line Telepon", ["No", "Yes", "No phone service"])
@@ -96,7 +96,7 @@ elif menu == "2. 🔮 Model Demo (Prediksi)":
         ])
 
     with col3:
-        st.subheader("💰 Informasi Biaya & Proteksi")
+        st.subheader(" Informasi Biaya & Proteksi")
         monthly_charges = st.number_input("Biaya Bulanan ($)", min_value=0.0, max_value=200.0, value=65.0)
         total_charges = st.number_input("Total Biaya Keseluruhan ($)", min_value=0.0, max_value=10000.0, value=780.0)
         
@@ -133,7 +133,7 @@ elif menu == "2. 🔮 Model Demo (Prediksi)":
     df_input = pd.DataFrame([input_data])
 
     st.divider()
-    if st.button("🚀 Jalankan Analisis Retensi Pelanggan", type="primary"):
+    if st.button(" Jalankan Analisis Retensi Pelanggan", type="primary"):
         if model is not None and scaler is not None:
             df_input_scaled = scaler.transform(df_input)
             
@@ -147,16 +147,16 @@ elif menu == "2. 🔮 Model Demo (Prediksi)":
             res_col1, res_col2 = st.columns([1.2, 1.0])
             
             with res_col1:
-                st.subheader("📢 Hasil Analisis Keputusan:")
+                st.subheader("Hasil Analisis Keputusan:")
                 if prediksi == 1:
-                    st.error(f"🚨 **RISIKO TINGGI (CHURN):** Pelanggan diprediksi akan BERHENTI berlangganan dengan tingkat probabilitas sebesar **{probabilitas_churn*100:.2f}%**.")
+                    st.error(f" **RISIKO TINGGI (CHURN):** Pelanggan diprediksi akan BERHENTI berlangganan dengan tingkat probabilitas sebesar **{probabilitas_churn*100:.2f}%**.")
                     st.markdown("""
                     **Rekomendasi Tindakan Segera (Tim Retensi):**
                     * Tawarkan program migrasi ke kontrak 1 atau 2 tahun dengan diskon khusus.
                     * Berikan bonus kuota gratis atau gratis layanan *Online Security/Tech Support* untuk meningkatkan *value*.
                     """)
                 else:
-                    st.success(f"✅ **AMAN (RETAIN):** Pelanggan diprediksi akan TETAP BERLANGGANAN dengan tingkat probabilitas loyalitas sebesar **{probabilitas_retain*100:.2f}%**.")
+                    st.success(f"**AMAN (RETAIN):** Pelanggan diprediksi akan TETAP BERLANGGANAN dengan tingkat probabilitas loyalitas sebesar **{probabilitas_retain*100:.2f}%**.")
                     st.markdown("""
                     **Rekomendasi Tindakan (Tim Retensi):**
                     * Jaga kepuasan pelanggan dengan program *loyalty reward* berkala.
@@ -164,7 +164,7 @@ elif menu == "2. 🔮 Model Demo (Prediksi)":
                     """)
                     
             with res_col2:
-                st.subheader("📈 Visualisasi Probabilitas")
+                st.subheader(" Visualisasi Probabilitas")
                 
                 chart_data = pd.DataFrame({
                     'Status Keputusan': ['Tetap Bertahan (Retain)', 'Akan Pergi (Churn)'],
@@ -180,12 +180,12 @@ elif menu == "2. 🔮 Model Demo (Prediksi)":
                 )
                 st.caption("Grafik interaktif di atas merepresentasikan tingkat keyakinan matematis model terhadap keputusan pelanggan.")
         else:
-            st.warning("⚠️ File model `best_model_lr.pkl` atau `scaler.pkl` tidak ditemukan. Menampilkan hasil simulasi dummy:")
-            st.info("🚨 **SIMULASI CHURN (Contoh Tanpa Model):** Probabilitas Churn 82.92%")
+            st.warning(" File model `best_model_lr.pkl` atau `scaler.pkl` tidak ditemukan. Menampilkan hasil simulasi dummy:")
+            st.info(" **SIMULASI CHURN (Contoh Tanpa Model):** Probabilitas Churn 82.92%")
 
 
-elif menu == "3. 🧪 Evaluasi Model":
-    st.title("🧪 Halaman 3: Laporan Evaluasi Model Machine Learning")
+elif menu == "3.  Evaluasi Model":
+    st.title(" Halaman 3: Laporan Evaluasi Model Machine Learning")
     st.markdown("Berikut adalah tabel perbandingan performa model yang diuji coba pada Soal 3.")
     st.divider()
 
@@ -205,8 +205,8 @@ elif menu == "3. 🧪 Evaluasi Model":
     """)
 
 
-elif menu == "4. 💡 Interpretasi Hasil":
-    st.title("💡 Halaman 4: Interpretasi Feature Importance & Business Insight")
+elif menu == "4.  Interpretasi Hasil":
+    st.title("Halaman 4: Interpretasi Feature Importance & Business Insight")
     st.markdown("Menganalisis faktor apa saja yang paling berkontribusi mendorong pelanggan untuk *churn*.")
     st.divider()
 
@@ -216,7 +216,7 @@ elif menu == "4. 💡 Interpretasi Hasil":
         'Kekuatan Pengaruh terhadap Churn': [2.4, 1.8, 1.1, -2.9]
     })
     
-    st.subheader("📊 Bobot Koefisien Fitur Utama")
+    st.subheader(" Bobot Koefisien Fitur Utama")
     st.bar_chart(data=coef_df, x='Nama Fitur/Variabel', y='Kekuatan Pengaruh terhadap Churn', color='#ff9f43')
     
     st.markdown("""
@@ -225,18 +225,18 @@ elif menu == "4. 💡 Interpretasi Hasil":
     """)
 
 
-elif menu == "5. 📄 Dokumentasi Proyek":
-    st.title("📄 Halaman 5: Dokumentasi Proyek & Tata Cara Penggunaan")
+elif menu == "5.  Dokumentasi Proyek":
+    st.title(" Halaman 5: Dokumentasi Proyek & Tata Cara Penggunaan")
     st.divider()
     
-    st.subheader("📋 Informasi Dataset")
+    st.subheader(" Informasi Dataset")
     st.markdown("""
     *   **Sumber Data:** Kaggle Telco Customer Churn Dataset.
     *   **Ukuran Data:** 7,043 Baris dengan 21 Kolom Fitur.
     *   **Tipe Tugas ML:** Klasifikasi Biner (0: Retain, 1: Churn).
     """)
     
-    st.subheader("🛠️ Cara Menjalankan Aplikasi Secara Lokal")
+    st.subheader(" Cara Menjalankan Aplikasi Secara Lokal")
     st.code("""
 # 1. Clone repository GitHub Anda
 git clone <url-repository-anda>
