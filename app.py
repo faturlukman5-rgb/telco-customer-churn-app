@@ -35,9 +35,8 @@ menu = st.sidebar.selectbox(
 
 st.sidebar.divider()
 st.sidebar.markdown("**Oleh Kelompok UAS:**")
-st.sidebar.caption("• FATUR LUKMAN DINATA    
-A11.2024.16076")
-st.sidebar.caption("• ATHAYA HELGA RAMADHANU  A11.2024.15832")
+st.sidebar.caption("• FATUR LUKMAN DINATA       A11.2024.16076")
+st.sidebar.caption("• ATHAYA HELGA RAMADHANU A11.2024.15832")
 
 
 if menu == "1.  Dashboard EDA":
