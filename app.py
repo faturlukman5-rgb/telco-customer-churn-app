@@ -239,7 +239,7 @@ elif menu == "5.  Dokumentasi Proyek":
     st.subheader(" Cara Menjalankan Aplikasi Secara Lokal")
     st.code("""
 # 1. Clone repository GitHub Anda
-git clone <url-repository-anda>
+git clone < https://github.com/faturlukman5-rgb/telco-customer-churn-app>
 
 # 2. Install dependency requirements
 pip install -r requirements.txt
